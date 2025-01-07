@@ -21,7 +21,7 @@
               pokemonDetails.height }}</p>
             <p class="border-bottom p-3 pokedex-subtitle fw-medium"><span class="fw-bold">Types:</span> {{
               pokemonTypes
-            }}</p>
+              }}</p>
           </template>
           <template v-else>
             <p>Loading Pokémon details...</p>
@@ -29,7 +29,9 @@
         </div>
         <div class="modal-footer border-0 justify-content-around">
           <button class="pokedex-btn pokedex-btn-active" @click="copyToClipboard">Share to my friends</button>
-          <img :src="favoriteIcon" alt="Favorite" class="fav-icon" @click="toggleFavorite" />
+          <img v-if="isFavorite" src="@/assets/icons/fav-active.svg" alt="Favorite" class="fav-icon"
+            @click="toggleFavorite" />
+          <img v-else src="@/assets/icons/fav-disabled.svg" alt="Favorite" class="fav-icon" @click="toggleFavorite" />
         </div>
       </div>
     </div>
@@ -64,11 +66,7 @@ const props = defineProps({
 const store = useFavoritesStore();
 
 const isFavorite = computed(() => store.isFavorite(props.pokemonName));
-const favoriteIcon = computed(() =>
-  isFavorite.value
-    ? "@/assets/icons/fav-active.svg"
-    : "@/assets/icons/fav-disabled.svg"
-);
+
 const pokemonTypes = computed(() => {
   if (!props.pokemonDetails || !props.pokemonDetails.types) return "";
   return props.pokemonDetails.types

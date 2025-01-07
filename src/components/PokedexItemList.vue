@@ -3,7 +3,9 @@
     <span class="pokedex-title" data-bs-toggle="modal" :data-bs-target="`#pokemonModal-${pokemon.name}`"
       @click="loadPokemonDetails">{{
         capitalizeFirstLetter(pokemon.name) }}</span>
-    <img :src="favoriteIcon" alt="Favorite" class="fav-icon" @click="toggleFavorite" />
+    <img v-if="isFavorite" src="@/assets/icons/fav-active.svg" alt="Favorite" class="fav-icon"
+      @click="toggleFavorite" />
+    <img v-else src="@/assets/icons/fav-disabled.svg" alt="Favorite" class="fav-icon" @click="toggleFavorite" />
   </div>
   <PokedexPokemonDetails :pokemonName="pokemon.name" :pokemonDetails="pokemonDetails" />
 </template>
@@ -23,11 +25,6 @@ const props = defineProps({
 
 const store = useFavoritesStore();
 const isFavorite = computed(() => store.isFavorite(props.pokemon.name));
-const favoriteIcon = computed(() =>
-  isFavorite.value
-    ? "@/assets/icons/fav-active.svg"
-    : "@/assets/icons/fav-disabled.svg"
-);
 
 const pokemonDetails = ref(null);
 
