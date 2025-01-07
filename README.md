@@ -1,41 +1,82 @@
-# pokedex
+# Pokédex
 
-This template should help get you started developing with Vue 3 in Vite.
+## Descripción
 
-## Recommended IDE Setup
+Este proyecto es una implementación de una Pokédex desarrollada con Vue.js. La aplicación permite explorar información detallada de los Pokémon obtenida de la [PokeAPI](https://pokeapi.co/). Incluye funcionalidades como la visualización de detalles de los Pokémon, manejo de favoritos, y opciones para compartir información.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+La aplicación está desplegada en [Vercel](https://vercel.com).
 
-## Customize configuration
+---
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+## Tecnologías Utilizadas
 
-## Project Setup
+### Frameworks y Herramientas Base
 
-```sh
-npm install
-```
+- **Vue.js**
+- **Vite**
+- **PokeAPI**
 
-### Compile and Hot-Reload for Development
+### Manejo de Estado
 
-```sh
-npm run dev
-```
+- **Pinia**: Biblioteca para el manejo global del estado, utilizada para gestionar datos como favoritos y Pokémon seleccionados.
 
-### Compile and Minify for Production
+### Enrutamiento
 
-```sh
-npm run build
-```
+- **Vue Router**: Biblioteca para manejar la navegación dentro de la aplicación.
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+### Estilo y Diseño
 
-```sh
-npm run test:unit
-```
+- **Bootstrap 5**
+- **CSS/SCSS**
 
-### Lint with [ESLint](https://eslint.org/)
+### Herramientas Adicionales
 
-```sh
-npm run lint
-```
+- **Axios o Fetch API**: Para realizar solicitudes HTTP a la PokeAPI.
+- **LocalStorage**: Para persistir datos como favoritos en el navegador.
+- **Git y GitHub**: Para control de versiones y alojamiento del código.
+- **Vercel**: Plataforma de despliegue utilizada para publicar la aplicación.
+
+---
+
+## Funcionalidades Clave
+
+1. **Exploración de Pokémon**: Consulta información detallada como peso, altura y tipos.
+2. **Manejo de Favoritos**: Permite marcar y desmarcar Pokémon como favoritos.
+3. **Compartir Información**: Permite compartir detalles con otros usuarios copiando al portapapeles.
+4. **Navegación Dinámica**: Rutas configuradas para acceder a detalles específicos mediante URLs.
+5. **Persistencia de Datos**: Favoritos guardados en `localStorage` para mantener el estado entre sesiones.
+
+---
+
+## Instalación y Configuración
+
+1. Clonar el repositorio:
+   ```bash
+   git clone https://github.com/danburitica/pokedex.git
+   ```
+2. Navegar al directorio del proyecto:
+   ```bash
+   cd pokedex
+   ```
+3. Instalar dependencias:
+   ```bash
+   npm install
+   ```
+4. Iniciar el entorno de desarrollo:
+   ```bash
+   npm run dev
+   ```
+
+---
+
+## Despliegue
+
+El proyecto está desplegado en Vercel y puedes acceder a la versión en vivo [aqui](https://vercel.com).
+
+---
+
+## Mejoras Futuras
+
+1. **Pruebas Unitarias**: Implementar pruebas para garantizar la estabilidad del proyecto.
+2. **Optimización de Rendimiento**: Implementar lazy loading y pre-fetching para mejorar la experiencia del usuario.
+3. **Accesibilidad**: Asegurar el cumplimiento de las pautas de accesibilidad web.
