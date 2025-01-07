@@ -4,7 +4,7 @@ import PokedexList from '@/views/PokedexList.vue'
 import PokedexFavorites from '@/views/PokedexFavorites.vue'
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(),
   routes: [
     { path: '/', name: 'PokedexWelcome', component: PokedexWelcome },
     { path: '/list', name: 'PokedexList', component: PokedexList },
