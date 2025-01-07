@@ -25,8 +25,8 @@ const store = useFavoritesStore();
 const isFavorite = computed(() => store.isFavorite(props.pokemon.name));
 const favoriteIcon = computed(() =>
   isFavorite.value
-    ? "src/assets/icons/fav-active.svg"
-    : "src/assets/icons/fav-disabled.svg"
+    ? "@/assets/icons/fav-active.svg"
+    : "@/assets/icons/fav-disabled.svg"
 );
 
 const pokemonDetails = ref(null);
