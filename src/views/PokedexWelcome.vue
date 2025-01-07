@@ -1,6 +1,6 @@
 <template>
   <div class="container d-flex justify-content-center align-items-center vh-100">
-    <div class="welcome-content text-center">
+    <div class="welcome-content text-center" :class="{ show: isRendered }">
       <div class="image-wrapper">
         <img src="@/assets/welcome.svg" alt="Welcome">
       </div>
@@ -15,6 +15,18 @@
     </div>
   </div>
 </template>
+
+<script setup>
+import { ref, onMounted } from "vue";
+
+const isRendered = ref(false);
+
+onMounted(() => {
+  setTimeout(() => {
+    isRendered.value = true;
+  }, 500);
+});
+</script>
 
 <style lang="scss" scoped>
 @import "@/scss/custom.scss";
@@ -43,5 +55,11 @@
 
 .welcome-content {
   min-height: 80vh;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.welcome-content.show {
+  opacity: 1;
 }
 </style>
