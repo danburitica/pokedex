@@ -21,7 +21,7 @@
               pokemonDetails.height }}</p>
             <p class="border-bottom p-3 pokedex-subtitle fw-medium"><span class="fw-bold">Types:</span> {{
               pokemonTypes
-            }}</p>
+              }}</p>
           </template>
           <template v-else>
             <p>Loading Pokémon details...</p>
@@ -66,8 +66,8 @@ const store = useFavoritesStore();
 const isFavorite = computed(() => store.isFavorite(props.pokemonName));
 const favoriteIcon = computed(() =>
   isFavorite.value
-    ? "/src/assets/icons/fav-active.svg"
-    : "/src/assets/icons/fav-disabled.svg"
+    ? "src/assets/icons/fav-active.svg"
+    : "src/assets/icons/fav-disabled.svg"
 );
 const pokemonTypes = computed(() => {
   if (!props.pokemonDetails || !props.pokemonDetails.types) return "";
