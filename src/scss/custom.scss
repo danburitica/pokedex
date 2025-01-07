@@ -1,0 +1,105 @@
+/* Variables */
+
+$pokedex-btn-active: #f22539;
+$pokedex-btn-active-pressed: #c00e20;
+$pokedex-btn-warning: #eca539;
+$pokedex-btn-disabled: #bfbfbf;
+$pokedex-bg: #f9f9f9;
+$pokedex-title: #353535;
+$pokedex-subtitle: #5e5e5e;
+$pokedex-placeholder: #bfbfbf;
+$pokedex-box-shadow: 0px 2px 10px 0px #0000000a;
+
+@import '../../node_modules/bootstrap/scss/bootstrap';
+
+/* Custom Classes */
+/* General */
+
+body {
+  font-family: 'Lato', sans-serif;
+  background-color: $pokedex-bg;
+}
+
+.content-router-view {
+  margin-top: 6rem;
+  padding-bottom: 5rem;
+}
+
+/* Buttons */
+
+.pokedex-btn {
+  padding: 0.7rem 1.5rem;
+  border-radius: 60px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-decoration: none;
+  background-color: $pokedex-btn-disabled;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.pokedex-btn-active {
+  background-color: $pokedex-btn-active;
+  &:hover {
+    background-color: darken($pokedex-btn-active, 10%);
+  }
+  &:active {
+    background-color: $pokedex-btn-active-pressed;
+  }
+  &:disabled {
+    background-color: $pokedex-btn-disabled;
+  }
+}
+.pokedex-btn-warning {
+  background-color: $pokedex-btn-warning;
+  &:hover {
+    background-color: darken($pokedex-btn-warning, 10%);
+  }
+  &:active {
+    background-color: darken($pokedex-btn-warning, 30%);
+  }
+  &:disabled {
+    background-color: $pokedex-btn-disabled;
+  }
+}
+
+/* Backgrounds */
+
+.pokedex-bg {
+  background-color: $pokedex-bg;
+}
+
+/* Texts */
+
+.pokedex-title {
+  color: $pokedex-title;
+  font-size: 1.6rem;
+}
+
+.pokedex-subtitle {
+  color: $pokedex-subtitle;
+  font-size: 1.1rem;
+}
+
+/* Inputs */
+
+.form-control {
+  height: 3rem;
+  box-shadow: $pokedex-box-shadow;
+
+  &::placeholder {
+    color: $pokedex-placeholder;
+    opacity: 0.8;
+  }
+
+  &:focus,
+  &:focus-visible {
+    box-shadow: $pokedex-box-shadow;
+    outline: none;
+  }
+}
+
+.input-group-text {
+  box-shadow: $pokedex-box-shadow;
+}
