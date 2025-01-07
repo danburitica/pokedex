@@ -1,85 +1,104 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
+  <PokedexLoading v-if="isLoading" />
+  <div v-else class="container vh-100">
+    <div v-if="showSearchAndNavbar" class="input-group px-3 py-4 search-bar">
+      <span class="input-group-text bg-white border-0">
+        <img src="@/assets/icons/search.svg" alt="Search" class="icon-lupa">
+      </span>
+      <input type="text" class="form-control p-2 border-0" id="pokemonSearch" placeholder="Search" aria-label="Search"
+        v-model="searchQuery" />
     </div>
-  </header>
 
-  <RouterView />
+    <div class="flex-grow-1">
+      <router-view :isLoading="isLoading" :loadPokemonList="loadPokemonList" :searchQuery="searchQuery" />
+    </div>
+
+    <nav div v-if="showSearchAndNavbar" class="navbar d-flex justify-content-evenly align-items-center">
+      <router-link to="/list" active-class="pokedex-btn-active"
+        class="pokedex-btn d-flex align-items-center justify-content-center w-25">
+        <img src="@/assets/icons/list.svg" alt="List" class="navbar-icon" /> All
+      </router-link>
+      <router-link to="/favorites" active-class="pokedex-btn-active"
+        class="pokedex-btn d-flex align-items-center justify-content-center w-25">
+        <img src="@/assets/icons/fav.svg" alt="Favorites" class="navbar-icon" /> Favorites
+      </router-link>
+    </nav>
+  </div>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+<script setup>
+import { computed, onMounted, ref, watch } from "vue";
+import { useRoute } from "vue-router";
+import PokedexLoading from "@/components/PokedexLoading.vue";
+import { usePokemon } from "@/composables/usePokemon";
+
+const route = useRoute();
+const showSearchAndNavbar = computed(() => route.path === "/list" || route.path === "/favorites");
+
+const { isLoading, loadPokemonList } = usePokemon();
+
+const searchQuery = ref("");
+
+watch(route, () => {
+  if (route.path !== "/list" || route.path !== "/favorites") {
+    searchQuery.value = "";
+  }
+});
+
+onMounted(() => {
+  loadPokemonList(0);
+});
+</script>
+
+<style lang="scss" scoped>
+@import "@/scss/custom.scss";
+
+.search-bar {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  background-color: $pokedex-bg;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
+.navbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
   width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
+  height: 80px;
+  background-color: $pokedex-bg;
+  border-top: 1px solid #ddd;
+  z-index: 10;
+  box-shadow: 0px -5px 4px 0px #0000000D;
 }
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
+.navbar-icon {
+  width: 1.2rem;
+  height: 1.2rem;
+  margin-right: 0.5rem;
 }
 
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
+.pokedex-btn {
+  min-width: 10rem;
 }
 
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+@media (max-width: 991.98px) {
+  .search-bar {
+    max-width: 100%;
   }
+}
 
-  .logo {
-    margin: 0 2rem 0 0;
+@media (min-width: 992px) and (max-width: 1799.98px) {
+  .search-bar {
+    max-width: 80%;
   }
+}
 
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
+@media (min-width: 1800px) {
+  .search-bar {
+    max-width: 70%;
   }
 }
 </style>
