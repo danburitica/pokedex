@@ -29,9 +29,10 @@
         </div>
         <div class="modal-footer border-0 justify-content-around">
           <button class="pokedex-btn pokedex-btn-active" @click="copyToClipboard">Share to my friends</button>
-          <img v-if="isFavorite" src="@/assets/icons/fav-active.svg" alt="Favorite" class="fav-icon"
+          <img v-if="showFavIcon && isFavorite" src="@/assets/icons/fav-active.svg" alt="Favorite" class="fav-icon"
             @click="toggleFavorite" />
-          <img v-else src="@/assets/icons/fav-disabled.svg" alt="Favorite" class="fav-icon" @click="toggleFavorite" />
+          <img v-else-if="showFavIcon && !isFavorite" src="@/assets/icons/fav-disabled.svg" alt="Favorite"
+            class="fav-icon" @click="toggleFavorite" />
         </div>
       </div>
     </div>
@@ -48,9 +49,9 @@
 
 <script setup>
 import { computed } from 'vue';
+import { useRoute } from 'vue-router';
 import { useFavoritesStore } from "@/stores/favorites";
 import bootstrap from 'bootstrap/dist/js/bootstrap.bundle';
-
 
 const props = defineProps({
   pokemonName: {
@@ -64,9 +65,10 @@ const props = defineProps({
 });
 
 const store = useFavoritesStore();
+const route = useRoute();
 
 const isFavorite = computed(() => store.isFavorite(props.pokemonName));
-
+const showFavIcon = computed(() => route.path !== "/favorites");
 const pokemonTypes = computed(() => {
   if (!props.pokemonDetails || !props.pokemonDetails.types) return "";
   return props.pokemonDetails.types
